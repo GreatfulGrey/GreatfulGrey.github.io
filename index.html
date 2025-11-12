@@ -12,6 +12,7 @@
             --purdue-gold: #C09139; /* Official darker gold */
             --light-bg: #f8f8f8;
             --text-color: #333;
+            --carousel-bg: #efefef; /* Light grey for carousel background */
         }
 
         /* Global Reset and Typography */
@@ -156,7 +157,7 @@
             min-width: 300px;
         }
 
-        /* Projects Section */
+        /* Experience Section (Existing Grid) */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -193,6 +194,98 @@
             text-decoration: none;
             margin-top: 10px;
         }
+        
+        /* --- NEW PROJECT & CAROUSEL STYLES --- */
+        .project-row {
+            display: flex;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            padding: 20px;
+            text-align: left;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .project-text {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .project-text h3 {
+            border-bottom: 2px solid var(--purdue-gold);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .carousel {
+            flex: 1;
+            max-width: 50%;
+            position: relative;
+            background-color: var(--carousel-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-viewport {
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            /* Note: JavaScript is needed to handle the dynamic transform/movement */
+        }
+        
+        .c-img {
+            width: 100%;
+            height: 300px; /* Fixed height for consistency */
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        
+        .carousel-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5em;
+            line-height: 1;
+            z-index: 10;
+        }
+        
+        .carousel-btn:hover {
+            background-color: var(--purdue-gold);
+            color: var(--purdue-black);
+        }
+        
+        /* Mobile adjustment for Project Row */
+        @media (max-width: 768px) {
+            .project-row {
+                flex-direction: column;
+            }
+            .carousel {
+                max-width: 100%;
+            }
+        }
+        /* --- END NEW PROJECT & CAROUSEL STYLES --- */
+
 
         /* Contact Section */
         .contact-section {
@@ -240,17 +333,20 @@
         }
         
     </style>
-    </head>
+    
+</head>
 <body>
 
     <header>
         <div class="container">
             <h1>Camden Kilroy</h1>
+            <span class="purdue-tag">Purdue Industrial Engineering</span>
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Tools & Skills</a></li>
-                    <li><a href="#projects">Projects & Experience</a></li>
+                    <li><a href="#experience">Experience</a></li> 
+                    <li><a href="#projects-detail">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -262,11 +358,11 @@
         <section id="about" class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <img src="images/profile.jpg" alt="Your Professional Headshot" class="profile-pic">
+                    <img src="assets/profile.jpg" alt="Your Professional Headshot" class="profile-pic">
                     <h2>Hello, I'm Camden Kilroy</h2>
                     <h3>Industrial Engineering Student | Purdue University</h3>
                     <p>
-                        Industrial Engineering Student at Purdue University with a specialization in semiconductor manufacturing. Experience & skills in CAD, PCB design, Process Improvement, and Lean Six Sigma.
+                        Industrial Engineering Student at Purdue University with a specialization in **semiconductor manufacturing**. Experience & skills in CAD, PCB design, Process Improvement, and Lean Six Sigma.
                     </p>
                     <a href="assets/Camden Kilroy Resume (11).pdf" class="btn" download>Download Resume (PDF)</a>
                 </div>
@@ -280,9 +376,9 @@
                 <h2> Skills & Tools</h2>
                 <div class="skills-list">
                     <ul>
-                        <li>Data & Analytics: Python (Pandas, NumPy, Scikit-learn), Matlab</li>
-                        <li>Design: AutoCAD, Altium Designer, Autodesk Suite, SOLIDWORKS </li>
-                        <li>Manufacturing & Quality: Six Sigma, MOZART Fab WISE, LSE Studio</li>
+                        <li>**Data & Analytics:** Python (Pandas, NumPy, Scikit-learn), Matlab</li>
+                        <li>**Design:** AutoCAD, Altium Designer, Autodesk Suite, SOLIDWORKS </li>
+                        <li>**Manufacturing & Quality:** Six Sigma, MOZART Fab WISE, LSE Studio</li>
                     </ul>
                 </div>
             </div>
@@ -290,7 +386,7 @@
 
         <hr>
 
-        <section id="projects" class="projects-section">
+        <section id="experience" class="experience-section">
             <div class="container">
                 <h2> Experience</h2>
                 <div class="project-grid">
@@ -302,29 +398,64 @@
                     </div>
 
                     <div class="project-item">
-                        <img src="images/project2-data.jpg" alt="Corvette">
+                        <img src="assets/project2-data.jpg" alt="Corvette">
                         <h3>GM Corvette Internship</h3>
                         <p>Interned at General Motors Corvette Assembly as an industrial engineering intern from June 2025 to August 2025. Used AutoCAD to create and improve a variety of plant assembly area layouts. Validated and balanced chassis line jobs using time/motion study tools.</p>
                     </div>
                     
                     <div class="project-item">
-                        <img src="images/internship-logo.jpg" alt="Purdue Baja DAQ Lead">
+                        <img src="assets/internship-logo.jpg" alt="Purdue Baja DAQ Lead">
                         <h3>Purdue Baja DAQ Lead</h3>
-                        <p></p>
+                        <p>Led the Data Acquisition (DAQ) system integration for the Purdue Baja SAE vehicle, focusing on sensor deployment and real-time data analysis to optimize suspension and engine performance.</p>
                         <a href="experience-details.html" target="_blank">Learn More</a>
                     </div>
                     
-                    </div>
+                </div>
             </div>
         </section>
 
         <hr>
+        
+        <section id="projects-detail" class="projects-detail-section">
+            <div class="container">
+                <h2> Detailed Projects</h2>
+                
+                <div class="project-row">
+                    <div class="project-text">
+                        <h3>High Ground Clearance Suspension Arm</h3>
+                        <p>Designed arched lower front suspension arms for the UW–Madison Baja SAE team, improving ground clearance over the previous model. Performed FEA in SolidWorks to evaluate performance under multiple loading conditions and refined the design to meet the targeted factor of safety. Collaborated with teammates to fabricate prototype arms and conducted offseason durability testing for endurance racing validation.</p>
+                    </div>
+                    <div class="carousel" data-track="arm">
+                        <div class="carousel-viewport">
+                            <div class="carousel-track">
+                                <img alt="Arm 1" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-1.jpg"/>
+                                <img alt="Arm 2" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-2.jpg"/>
+                                <img alt="Arm 3" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-3.jpg"/>
+                                <img alt="Arm 4" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-4.jpg"/>
+                                <img alt="Arm 5" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-5.jpg"/>
+                                <img alt="Arm 6" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-6.jpg"/>
+                                <img alt="Arm 7" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-7.jpg"/>
+                                <img alt="Arm 8" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-8.jpg"/>
+                                <img alt="Arm 9" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/Arm-9.jpg"/>
+                            </div>
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="carousel-btn prev" data-target="arm">&#10094;</button>
+                            <button class="carousel-btn next" data-target="arm">&#10095;</button>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+        </section>
+        
+        <hr>
 
         <section id="contact" class="contact-section">
             <div class="container">
-                <h2> Let's Connect</h2>
+                <h2>Let's Connect</h2>
                 <p>I am actively seeking semiconductor manufacturing internships. Please feel free to contact me.</p>
-                <a href="mailto:your.purdue.email@purdue.edu" class="contact-link">kilroyc@purdue.edu</a>
+                <a href="mailto:kilroyc@purdue.edu" class="contact-link">kilroyc@purdue.edu</a>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/camden-kilroy/" target="_blank">LinkedIn</a> |
                     <a href="https://github.com/GreatfulGrey" target="_blank">GitHub</a> |
@@ -340,9 +471,6 @@
             <p>&copy; <script>document.write(new Date().getFullYear())</script> Camden Kilroy | Boiler Up!</p>
         </div>
     </footer>
-
-</body>
-
+    
+    </body>
 </html>
-
-
