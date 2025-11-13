@@ -22,20 +22,11 @@
             padding: 0;
             line-height: 1.6;
             color: var(--text-color);
-            /* --- START MODIFIED BACKGROUND CSS --- */
-            
-            /* 1. Remove the solid background color */
-            /* background-color: var(--light-bg); */ 
-            
-            /* 2. Set the background image (adjust filename as needed) */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('assets/purdue-ie-bg.jpg');
-            
-            /* 3. Scale and position the image */
-            background-size: cover; 
-            background-attachment: fixed; /* Optional: Creates a cool parallax effect */
-            background-position: center; 
-            
-            /* --- END MODIFIED BACKGROUND CSS --- */
+            /* --- REVERTED BODY CSS --- */
+            background-color: var(--light-bg); 
+            background-image: none; /* Crucial: Remove background image from body */
+            background-attachment: scroll; /* Crucial: Remove fixed background */
+            /* --- END REVERTED BODY CSS --- */
         }
         
         .container {
@@ -106,15 +97,22 @@
         section {
             padding: 60px 0;
             text-align: center;
-            /* To allow the body background image to show, we remove the background here 
-               and rely on the content containers being white. */
         }
 
         .hero {
             /* --- MODIFIED HERO SECTION CSS --- */
-            background-image: none; /* Remove previous background image/gradient */
-            background-color: white; /* Explicitly set content block background to white for contrast */
+            /* Set a minimum height for the section */
             min-height: 450px; 
+            
+            /* Apply background image properties here, including an overlay for contrast */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('assets/purdue-ie-bg.jpg');
+            background-size: cover; /* Ensures the image covers the entire area */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat;
+            
+            /* Ensure the text and profile pic have good contrast (using a light overlay) */
+            
+            /* Original padding */
             padding: 80px 0;
             position: relative; 
             /* --- END MODIFIED HERO SECTION CSS --- */
@@ -130,6 +128,8 @@
         }
 
         .hero-content h2 {
+            /* Ensure text in hero is clear, even with the overlay */
+            color: var(--purdue-black); 
             font-size: 2.5em;
             margin-bottom: 5px;
         }
@@ -157,7 +157,7 @@
             transform: translateY(-2px);
         }
         
-        /* Skills Section */
+        /* Skills Section (Kept white by default) */
         .skills-list ul {
             list-style: none;
             padding: 0;
@@ -169,11 +169,11 @@
         }
 
         .skills-list li {
-            background-color: white; /* Keep content item white */
+            background-color: white; 
             border-left: 5px solid var(--purdue-gold);
             padding: 15px 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            flex: 1 1 45%; /* Allows two columns on wider screens */
+            flex: 1 1 45%; 
             min-width: 300px;
         }
 
@@ -233,7 +233,6 @@
             flex: 1;
             padding: 20px;
         }
-        /* ... (rest of the carousel/project row styles) ... */
 
         .project-text h3 {
             border-bottom: 2px solid var(--purdue-gold);
@@ -532,4 +531,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-```
