@@ -22,7 +22,20 @@
             padding: 0;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--light-bg);
+            /* --- START MODIFIED BACKGROUND CSS --- */
+            
+            /* 1. Remove the solid background color */
+            /* background-color: var(--light-bg); */ 
+            
+            /* 2. Set the background image (adjust filename as needed) */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('assets/purdue-ie-bg.jpg');
+            
+            /* 3. Scale and position the image */
+            background-size: cover; 
+            background-attachment: fixed; /* Optional: Creates a cool parallax effect */
+            background-position: center; 
+            
+            /* --- END MODIFIED BACKGROUND CSS --- */
         }
         
         .container {
@@ -93,11 +106,18 @@
         section {
             padding: 60px 0;
             text-align: center;
+            /* To allow the body background image to show, we remove the background here 
+               and rely on the content containers being white. */
         }
 
         .hero {
-            background-color: white;
+            /* --- MODIFIED HERO SECTION CSS --- */
+            background-image: none; /* Remove previous background image/gradient */
+            background-color: white; /* Explicitly set content block background to white for contrast */
+            min-height: 450px; 
             padding: 80px 0;
+            position: relative; 
+            /* --- END MODIFIED HERO SECTION CSS --- */
         }
 
         .profile-pic {
@@ -149,7 +169,7 @@
         }
 
         .skills-list li {
-            background-color: white;
+            background-color: white; /* Keep content item white */
             border-left: 5px solid var(--purdue-gold);
             padding: 15px 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -167,7 +187,7 @@
         }
 
         .project-item {
-            background-color: white;
+            background-color: white; /* Keep content item white */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -198,7 +218,7 @@
         /* --- NEW PROJECT & CAROUSEL STYLES --- */
         .project-row {
             display: flex;
-            background-color: white;
+            background-color: white; /* Keep content item white */
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -213,6 +233,7 @@
             flex: 1;
             padding: 20px;
         }
+        /* ... (rest of the carousel/project row styles) ... */
 
         .project-text h3 {
             border-bottom: 2px solid var(--purdue-gold);
@@ -424,13 +445,55 @@
                         <h3>Baja Central Reciever Node</h3>
                         <p>Designed a PCB hat to connect to a Raspberry Pi Zero 2W to collect data over a CAN network and wirelessly transmit it back to a pit station. Utilizes an SX1262 LoRa chip for wireless transmission up to ~2 miles. The central receiver also features a MAX-M10 GPS Module to collect GPS data, including heading, real speed, altitude, and location. </p>
                     </div>
-                    <div class="carousel" data-track="arm">
+                    <div class="carousel" data-track="pcb">
                         <div class="carousel-viewport">
                             <div class="carousel-track">
-                                <img alt="Arm 1" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3454.jpg"/>
-                                <img alt="Arm 2" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3320.PNG"/>
-                                <img alt="Arm 3" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3316.PNG"/>
-                                <img alt="Arm 4" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3577.jpg"/>
+                                <img alt="pcb 1" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3454.jpg"/>
+                                <img alt="pcb 2" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3320.PNG"/>
+                                <img alt="pcb 3" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3316.PNG"/>
+                                <img alt="pcb 4" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3577.jpg"/>
+                            </div>
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="carousel-btn prev" data-target="arm">&#10094;</button>
+                            <button class="carousel-btn next" data-target="arm">&#10095;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-row">
+                    <div class="project-text">
+                        <h3>PCB Reflow OVen</h3>
+                        <p></p>
+                    </div>
+                    <div class="carousel" data-track="pcb">
+                        <div class="carousel-viewport">
+                            <div class="carousel-track">
+                                <img alt="pcb 1" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3454.jpg"/>
+                                <img alt="pcb 2" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3320.PNG"/>
+                                <img alt="pcb 3" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3316.PNG"/>
+                                <img alt="pcb 4" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3577.jpg"/>
+                            </div>
+                        </div>
+                        <div class="carousel-buttons">
+                            <button class="carousel-btn prev" data-target="arm">&#10094;</button>
+                            <button class="carousel-btn next" data-target="arm">&#10095;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-row">
+                    <div class="project-text">
+                        <h3>Baja Central Reciever Node</h3>
+                        <p>Designed a PCB hat to connect to a Raspberry Pi Zero 2W to collect data over a CAN network and wirelessly transmit it back to a pit station. Utilizes an SX1262 LoRa chip for wireless transmission up to ~2 miles. The central receiver also features a MAX-M10 GPS Module to collect GPS data, including heading, real speed, altitude, and location. </p>
+                    </div>
+                    <div class="carousel" data-track="pcb">
+                        <div class="carousel-viewport">
+                            <div class="carousel-track">
+                                <img alt="pcb 1" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3454.jpg"/>
+                                <img alt="pcb 2" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3320.PNG"/>
+                                <img alt="pcb 3" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3316.PNG"/>
+                                <img alt="pcb 4" class="c-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/IMG_3577.jpg"/>
                             </div>
                         </div>
                         <div class="carousel-buttons">
@@ -469,3 +532,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+```
