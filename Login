@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<style>
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90d9;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 6px;
+}
+</style>
+
+<body>
+  
+<header>
+    <h1>Group Portal</h1>
+    <p>Enterprise Resource System</p>
+    <div class="divider"></div>
+</header>
+
+<main>
+ 
+    <!-- ── Team Members ── -->
+    <section class="team-section">
+        <p class="section-label">Our Team</p>
+        <div class="team-grid">
+ 
+            <!-- 
+              Replace the src="..." with the path to your image, e.g. src="images/alice.jpg"
+              Replace the alt and member-name text with your group member's name.
+            -->
+ 
+            <div class="member-card">
+                <img src="https://i.pravatar.cc/200?img=1" alt="Aarin Dutta" /><br>
+                <span class="member-name">Aarin Dutta</span><br>
+            </div>
+ 
+            <div class="member-card">
+                <img src="https://i.pravatar.cc/200?img=3" alt="Kimo McDaniel" /><br>
+                <span class="member-name">Kimo McDaniel</span><br>
+            </div>
+ 
+            <div class="member-card">
+                <img src="https://i.pravatar.cc/200?img=5" alt="Camden Kilroy" /><br>
+                <span class="member-name">Camden Kilroy</span><br>
+            </div>
+ 
+            <div class="member-card">
+                <img src="https://i.pravatar.cc/200?img=8" alt="Yubin Liu" /><br>
+                <span class="member-name">Yubin Liu</span><br>
+            </div>
+ 
+            <div class="member-card">
+                <img src="https://i.pravatar.cc/200?img=8" alt="Sebastian Diaz" /><br>
+                <span class="member-name">Sebastian Diaz</span><br>
+            </div>
+        </div>
+    </section>
+
+<section class="login-section">
+  <form>
+    <br>
+    <label for="my_username">Username</label> <input type="text" name="my_username" id="my_username" placeholder="Enter Username here"><br>
+    <label for="my_password">Password</label> <input type="text" name="my_password" id="my_password" placeholder="Enter Password here"><br> 
+    <button class="my-button" id="clickBtn">Submit</button>
+
+  </form>
+</section>
+</body>
+
+</html>
