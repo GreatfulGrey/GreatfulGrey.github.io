@@ -1,31 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <style>
-  button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4a90d9;
-    color: #fff;
-    font-size: 15px;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 6px;
-}
   .team-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 50px;
   }
-
   .member-card {
     text-align: center;
   }
-
   .member-card img {
     display: block;
     width: 120px;
@@ -45,33 +30,60 @@
   .section-label {
     text-align: center;
   }
-
-.main-header {
+  .main-header {
     display: flex;
     align-items: center;            
     padding: 1rem;                 
     background-color: lightgrey;    
-}
-  
-</style>
+  }
 
+  .login-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .login-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+  }
+
+  .login-section input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .login-section button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90d9;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+</style>
+</head>
 <body>
   
 <header class="main-header">
    <img style="float: right;" src="your-image-source.jpg" alt="Logo" class="header-image">
 </header>
-
 <main>
  
     <!-- ── Team Members ── -->
     <section class="team-section">
         <p class="section-label">Our Team</p>
         <div class="team-grid">
- 
-            <!-- 
-              Replace the src="..." with the path to your image, e.g. src="images/alice.jpg"
-              Replace the alt and member-name text with your group member's name.
-            -->
  
             <div class="member-card">
                 <img src="https://i.pravatar.cc/200?img=1" alt="Aarin Dutta" /><br>
@@ -100,17 +112,17 @@
         </div>
     </section>
 
-<section class="login-section">
-  <form>
-    <p class="login-title">Sign In</p>
-    <label class="section-label" for="my_username">Username</label> <input type="text" name="my_username" id="my_username" placeholder="Enter Username here"><br>
-    <label class="section-label" for="my_password">Password</label> <input type="text" name="my_password" id="my_password" placeholder="Enter Password here"><br> 
-    <button class="my-button" id="clickBtn">Submit</button>
-
-  </form>
-</section>
+    <section class="login-section">
+      <form>
+        <p class="login-title">Sign In</p>
+        <label class="section-label" for="my_username">Username</label>
+        <input type="text" name="my_username" id="my_username" placeholder="Enter Username here">
+        <label class="section-label" for="my_password">Password</label>
+        <input type="text" name="my_password" id="my_password" placeholder="Enter Password here">
+        <button class="my-button" id="clickBtn">Submit</button>
+      </form>
+    </section>
   
 </main>
 </body>
-
 </html>
