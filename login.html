@@ -11,7 +11,13 @@ if($_SESSION['user_loggedIn']){   // removed the !
     exit();
 }
 
-$users = [ /* ... */ ];
+$users = [
+    "driver1"    => ["password" => "",  "role" => "",    "name" => ""],
+    "driver2"    => ["password" => "",  "role" => "",    "name" => ""],
+    "warehouse1" => ["password" => "",  "role" => "", "name" => ""],
+    "warehouse2" => ["password" => "",  "role" => "", "name" => ""],
+    "manager1"   => ["password" => "",  "role" => "",   "name" => ""],
+];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["my_username"] ?? "");
@@ -50,9 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       justify-content: center;
       gap: 50px;
   }
+    
   .member-card {
     text-align: center;
   }
+    
   .member-card img {
     display: block;
     width: 120px;
@@ -72,17 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   .section-label {
     text-align: center;
   }
+    
   .main-header {
     display: flex;
     align-items: center;            
     padding: 1rem;                 
     background-color: lightgrey;    
   }
+    
   .main-header img {
     margin-left: auto;
     height: 50px;
     width: auto;
   }
+    
   .main-footer {
     display: flex;
     align-items: center;
@@ -100,12 +111,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     justify-content: center;
     margin-top: 2rem;
   }
+    
   .login-section form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 300px;
   }
+    
   .login-section input {
     width: 100%;
     padding: 8px;
@@ -114,6 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+    
   .login-section button {
     width: 100%;
     padding: 10px;
