@@ -1,4 +1,39 @@
 <!DOCTYPE html>
+
+<?php
+session_start();
+
+$error = "";
+
+// If already logged in, then go right to the dashboard
+if(!$_SESSION['user_loggedIn']){
+    header("location: dashboard.php");
+}
+
+$users = [
+    "driver1"    => ["password" => "",  "role" => "",    "name" => ""],
+    "driver2"    => ["password" => "",  "role" => "",    "name" => ""],
+    "warehouse1" => ["password" => "",  "role" => "", "name" => ""],
+    "warehouse2" => ["password" => "",  "role" => "", "name" => ""],
+    "manager1"   => ["password" => "",  "role" => "",   "name" => ""],
+];
+
+// Handle login form submission
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST["my_username"] ?? "");
+    $password = trim($_POST["my_password"] ?? "");
+
+    if (isset($users[$username]) && $users[$username]["password"] === $password) {
+        $_SESSION["user"]     = $username;
+        $_SESSION["role"]     = $users[$username]["role"];
+        $_SESSION["name"]     = $users[$username]["name"];
+        header("Location: dashboard.php");
+        exit();
+    } else {
+        $error = "Invalid username or password. Please try again.";
+}
+?>
+
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
