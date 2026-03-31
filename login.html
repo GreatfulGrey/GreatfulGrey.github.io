@@ -3,8 +3,7 @@ session_start();
 
 $error = "";
 
-// If already logged in, redirect to dashboard
-if($_SESSION['user_loggedIn']){  
+if ($_SESSION['user_loggedIn']) {
     header("location: dashboard.php");
     exit();
 }
@@ -25,14 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION["user"]  = $username;
         $_SESSION["role"]  = $users[$username]["role"];
         $_SESSION["name"]  = $users[$username]["name"];
-        $_SESSION["user_loggedIn"] = true;   
+        $_SESSION["user_loggedIn"] = true;
         header("Location: dashboard.php");
         exit();
     } else {
         $error = "Invalid username or password. Please try again.";
-    }   // ← closing brace was missing
-}
-
+    }
+}  // ← THIS closing brace is critical
 ?>
 
 <!DOCTYPE html>
