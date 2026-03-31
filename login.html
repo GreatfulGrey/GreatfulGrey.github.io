@@ -6,7 +6,7 @@ session_start();
 $error = "";
 
 // If already logged in, redirect to dashboard
-if($_SESSION['user_loggedIn']){   // removed the !
+if($_SESSION['user_loggedIn']){  
     header("location: dashboard.php");
     exit();
 }
