@@ -2,6 +2,16 @@
 <html lang="en">
 <head>
 <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
   .team-grid {
       display: flex;
       flex-wrap: wrap;
@@ -36,16 +46,15 @@
     padding: 1rem;                 
     background-color: lightgrey;    
   }
-
   .main-header img {
     margin-left: auto;
     height: 50px;
     width: auto;
-}
-
+  }
   .main-footer {
     display: flex;
-    align-items: center;            
+    align-items: center;
+    justify-content: center;
     padding: 1rem;                 
     background-color: lightgrey;    
   }
@@ -59,14 +68,12 @@
     justify-content: center;
     margin-top: 2rem;
   }
-
   .login-section form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 300px;
   }
-
   .login-section input {
     width: 100%;
     padding: 8px;
@@ -75,7 +82,6 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-
   .login-section button {
     width: 100%;
     padding: 10px;
@@ -87,6 +93,12 @@
     border-radius: 4px;
     cursor: pointer;
     margin-top: 6px;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   
 </style>
@@ -129,7 +141,6 @@
             </div>
         </div>
     </section>
-
     <section class="login-section">
       <form>
         <p class="login-title">Sign In Below</p>
