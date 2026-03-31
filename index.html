@@ -1,104 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>CSS Template</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>PharmaCool ERP</title>
+    
+    <style>
+        .hidden { display: none !important; }
+    </style>
 </head>
 <body>
 
-<h2>CSS Layout Float</h2>
-<p>In this example, we have created a header, two columns/boxes and a footer. On smaller screens, the columns will stack on top of each other.</p>
-<p>Resize the browser window to see the responsive effect (you will learn more about this in our next chapter - HTML Responsive.)</p>
+    <nav class="sidebar">
+        <h2 class="sidebar-title">PharmaCool</h2>
+        <ul>
+            <li data-target="view-overview">Overview</li>
+            <li data-target="view-warehouse">Warehouse Details</li>
+            <li data-target="view-shipments">Shipments</li>
+            <li data-target="view-batch">Batch/Vendor</li>
+			<li data-target="view-custody">Custody Event</li>
+			<li data-target="view-settings">Setting</li>
 
-<header>
-  <h2>Cities</h2>
-</header>
+        </ul>
+    </nav>
 
-<section>
-  <nav>
-    <ul>
-      <li><a href="#">London</a></li>
-      <li><a href="#">Paris</a></li>
-      <li><a href="#">Tokyo</a></li>
-    </ul>
-  </nav>
-  
-  <article>
-    <h1>London</h1>
-    <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-    <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
-  </article>
-</section>
+    <div class="main-wrapper">
+        
+        <header>        
+            <div id="header-center">
+                <form class="search-form">
+                    <input type="search" placeholder="Search Bar">
+                </form>
+            </div>
+        </header>
 
-<footer>
-  <p>Footer</p>
-</footer>
+        <main class="content">
+		
+            <div id="view-overview" class="view-section">
+			<h2>Status</h2>
+				<section id ="status">
+					<div class = "status-box">Uh oh</div>
+				</section>
+		
+			<h2>Notes</h2>
+			    <section id="notes">
+                    <div class="note-box">Note 1</div>
+                    <div class="note-box">Note 2</div>
+                    <div class="note-box">Note 3</div>
+					<div class="note-box">Note 4</div>
+                    <div class="note-box">Note 5</div>
+                    <div class="note-box">Note 6</div>
+                </section>
+				
+			<h2>Data</h2>
+                <section id="data-boxes">
+                    <h3>Table</h3>
+                    <p>Balls</p>
+                </section>
+
+                <section id="data-table">
+                    <h3>Table</h3>
+                    <p>Balls</p>
+                </section>
+
+                <section id="graphs">
+                    <div class="graph-box">Graph 1</div>
+                    <div class="graph-box">Graph 2</div>
+                    <div class="graph-box">Graph 3</div>
+                </section>
+            </div>
+
+            <div id="view-warehouse" class="view-section hidden">
+                <section class="Sales">
+                    <h2>Sales Dashboard Placeholder</h2>
+                </section>
+            </div>
+
+            <div id="view-shipments" class="view-section hidden">
+                <section class="KPI">
+                    <h2>KPI Tracking Placeholder</h2>
+                </section>
+                <section id="data-table">
+                    <h3>Table</h3>
+                    <p>Ballsn [POIFBADSOIDJIU;oihOIHpoioihsbdfluihdsflihuadsfluihasdflbhuiusadlghuil</p>
+                </section>
+            </div>
+
+            <div id="view-batch" class="view-section hidden">
+                <section class="KPI">
+                    <h2>KPI Tracking Placeholder</h2>
+                </section>
+                <section id="data-table">
+                    <h3>Table</h3>
+                    <p>Ballsn [POIFBADSOIDJIU;oihOIHpoioihsbdfluihdsflihuadsfluihasdflbhuiusadlghuil</p>
+                </section>
+            </div>
+
+            <div id="view-custody" class="view-section hidden">
+                <section class="KPI">
+                    <h2>KPI Tracking Placeholder</h2>
+                </section>
+                <section id="data-table">
+                    <h3>Table</h3>
+                    <p>Ballsn [POIFBADSOIDJIU;oihOIHpoioihsbdfluihdsflihuadsfluihasdflbhuiusadlghuil</p>
+                </section>
+            </div>
+
+            <div id="view-settings" class="view-section hidden">
+                <section class="wireframe-border" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #fff; gap: 20px;">
+                    <h2>Settings & Details Placeholder</h2>
+                    <button style="padding: 10px 20px; border: 2px solid #d32f2f; background: white; color: #d32f2f; border-radius: 5px; cursor: pointer;">Logout Dummy Button</button>
+                </section>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="copyright-footer">PharmaCool 2026 ®</div>
+        </footer>
+
+    </div>
 
 </body>
 </html>
-
