@@ -9,11 +9,11 @@ if ($_SESSION['user_loggedIn']) {
 }
 
 $users = [
-    "driver1"    => ["password" => "",  "role" => "",    "name" => ""],
-    "driver2"    => ["password" => "",  "role" => "",    "name" => ""],
-    "warehouse1" => ["password" => "",  "role" => "", "name" => ""],
-    "warehouse2" => ["password" => "",  "role" => "", "name" => ""],
-    "manager1"   => ["password" => "",  "role" => "",   "name" => ""],
+    "driver1"    => ["password" => "pass1", "role" => "driver",    "name" => "Driver One"],
+    "driver2"    => ["password" => "pass2", "role" => "driver",    "name" => "Driver Two"],
+    "warehouse1" => ["password" => "pass3", "role" => "warehouse", "name" => "Warehouse One"],
+    "warehouse2" => ["password" => "pass4", "role" => "warehouse", "name" => "Warehouse Two"],
+    "manager1"   => ["password" => "pass5", "role" => "manager",   "name" => "Manager One"],
 ];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -30,5 +30,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $error = "Invalid username or password. Please try again.";
     }
-
+}  
 ?>
