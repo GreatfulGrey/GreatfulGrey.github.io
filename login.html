@@ -1,174 +1,269 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+  :root {
+    --clr-dark-a0: #000000;
+    --clr-light-a0: #ffffff;
+    --clr-primary-a0: #0a8efe;
+    --clr-primary-a10: #4c9aff;
+    --clr-primary-a20: #6ca6ff;
+    --clr-surface-a0: #121212;
+    --clr-surface-a10: #282828;
+    --clr-surface-a20: #3f3f3f;
+    --clr-surface-a30: #575757;
+    --clr-surface-a40: #717171;
+    --clr-surface-a50: #8b8b8b;
+    --clr-surface-tonal-a0: #191d26;
+    --clr-surface-tonal-a10: #2e323a;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
   html, body {
     height: 100%;
     margin: 0;
+    font-family: sans-serif;
   }
 
   body {
     display: flex;
     flex-direction: column;
-  }
-
-  .team-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 50px;
-  }
-    
-  .member-card {
-    text-align: center;
-  }
-    
-  .member-card img {
-    display: block;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-    
-  h1 {
-    text-align: center;
-  }
-  
-  p {
-    text-align: center;
-  }
-  
-  .section-label {
-    text-align: center;
-  }
-    
-  .main-header {
-    display: flex;
-    align-items: center;            
-    padding: 1rem;                 
-    background-color: lightgrey;    
-  }
-    
-  .main-header img {
-    margin-left: auto;
-    height: 50px;
-    width: auto;
-  }
-    
-  .main-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;                 
-    background-color: lightgrey;    
-  }
-  
-  .footer-content {
-    text-align: center;
-  }
-  
-  .login-section {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-    
-  .login-section form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-  }
-    
-  .login-section input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-    
-  .login-section button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4a90d9;
-    color: #fff;
-    font-size: 15px;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 6px;
+    background-color: var(--clr-surface-a0);
+    color: var(--clr-light-a0);
   }
 
   main {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 2rem 0;
   }
-  
+
+  /* Header */
+  .main-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--clr-surface-a10);
+    border-bottom: 2px solid var(--clr-surface-a20);
+  }
+
+  .main-header .brand {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--clr-primary-a10);
+    letter-spacing: 1px;
+  }
+
+  .main-header img {
+    margin-left: auto;
+    height: 50px;
+    width: auto;
+  }
+
+  /* Footer */
+  .main-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--clr-surface-a10);
+    border-top: 2px solid var(--clr-surface-a20);
+  }
+
+  .footer-content p {
+    color: var(--clr-surface-a50);
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Team section */
+  .team-section {
+    margin-bottom: 2rem;
+  }
+
+  .team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 1rem;
+  }
+
+  .member-card {
+    text-align: center;
+  }
+
+  .member-card img {
+    display: block;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--clr-surface-a30);
+    margin: 0 auto 8px;
+    background: var(--clr-surface-a20);
+  }
+
+  .member-name {
+    color: var(--clr-light-a0);
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    text-align: center;
+    color: var(--clr-light-a0);
+  }
+
+  p {
+    text-align: center;
+    color: var(--clr-light-a0);
+  }
+
+  .section-label {
+    text-align: center;
+    color: var(--clr-surface-a50);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  /* Login section */
+  .login-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .login-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    background-color: var(--clr-surface-a10);
+    border: 2px solid var(--clr-surface-a20);
+    border-radius: 12px;
+    padding: 2rem;
+    gap: 4px;
+  }
+
+  .login-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--clr-primary-a10) !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .login-section label.section-label {
+    align-self: flex-start;
+    color: var(--clr-surface-a50);
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+  }
+
+  .login-section input {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    border: 2px solid var(--clr-surface-a30);
+    border-radius: 6px;
+    background-color: var(--clr-surface-a20);
+    color: var(--clr-light-a0);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .login-section input::placeholder {
+    color: var(--clr-surface-a40);
+  }
+
+  .login-section input:focus {
+    border-color: var(--clr-primary-a0);
+  }
+
+  .login-section button {
+    width: 100%;
+    padding: 11px;
+    background-color: var(--clr-primary-a0);
+    color: var(--clr-light-a0);
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .login-section button:hover {
+    background-color: var(--clr-primary-a10);
+  }
 </style>
 </head>
 <body>
-  
+
 <header class="main-header">
-   <img src="" alt="Logo" class="header-image">
+  <span class="brand">PharmaCool</span>
+  <img src="" alt="Logo" class="header-image">
 </header>
+
 <main>
- 
-    <!-- ── Team Members ── -->
-    <section class="team-section">
-        <p class="section-label">Our Team</p>
-        <div class="team-grid">
- 
-            <div class="member-card">
-                <img src="Aarin_Headshot.jpg" alt="Aarin Dutta" /><br>
-                <span class="member-name">Aarin Dutta</span><br>
-            </div>
- 
-            <div class="member-card">
-                <img src="headshotKimo22.jpg" alt="Kimo McDaniel" /><br>
-                <span class="member-name">Kimo McDaniel</span><br>
-            </div>
- 
-            <div class="member-card">
-                <img src="Cam_Head.JPG" alt="Camden Kilroy" /><br>
-                <span class="member-name">Camden Kilroy</span><br>
-            </div>
- 
-            <div class="member-card">
-                <img src="WechatIMG728.jpeg" alt="Yubin Liu" /><br>
-                <span class="member-name">Yubin Liu</span><br>
-            </div>
- 
-            <div class="member-card">
-                <img src="https://i.pravatar.cc/200?img=8" alt="Sebastian Diaz" /><br>
-                <span class="member-name">Sebastian Diaz</span><br>
-            </div>
-        </div>
-    </section>
-    <section class="login-section">
-      <form method="POST" action="login.php">
-        <p class="login-title">Sign In Below</p>
-        <label class="section-label" for="my_username">Username</label>
-        <input type="text" name="my_username" id="my_username" placeholder="Enter Username here">
-        <label class="section-label" for="my_password">Password</label>
-        <input type="text" name="my_password" id="my_password" placeholder="Enter Password here">
-        <button class="my-button" id="clickBtn">Login</button><br>
-      </form>
-    </section>
-  
+  <!-- Team Members -->
+  <section class="team-section">
+    <p style="font-size:1rem; color: var(--clr-light-a0); margin-bottom:1rem;">Our Team</p>
+    <div class="team-grid">
+
+      <div class="member-card">
+        <img src="Aarin_Headshot.jpg" alt="Aarin Dutta">
+        <span class="member-name">Aarin Dutta</span>
+      </div>
+
+      <div class="member-card">
+        <img src="headshotKimo22.jpg" alt="Kimo McDaniel">
+        <span class="member-name">Kimo McDaniel</span>
+      </div>
+
+      <div class="member-card">
+        <img src="Cam_Head.JPG" alt="Camden Kilroy">
+        <span class="member-name">Camden Kilroy</span>
+      </div>
+
+      <div class="member-card">
+        <img src="WechatIMG728.jpeg" alt="Yubin Liu">
+        <span class="member-name">Yubin Liu</span>
+      </div>
+
+      <div class="member-card">
+        <img src="https://i.pravatar.cc/200?img=8" alt="Sebastian Diaz">
+        <span class="member-name">Sebastian Diaz</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="login-section">
+    <form method="POST" action="login.php">
+      <p class="login-title">Sign In Below</p>
+      <label class="section-label" for="my_username">Username</label>
+      <input type="text" name="my_username" id="my_username" placeholder="Enter Username here">
+      <label class="section-label" for="my_password">Password</label>
+      <input type="password" name="my_password" id="my_password" placeholder="Enter Password here">
+      <button class="my-button" id="clickBtn">Login</button><br>
+    </form>
+  </section>
 </main>
 
- <footer class="main-footer">
-    <div class ="footer-content">
-     <p>All Rights Reserved &copy; 2026 PharmaCool</p>
-    </div>
-  </footer>
+<footer class="main-footer">
+  <div class="footer-content">
+    <p>All Rights Reserved &copy; 2026 PharmaCool</p>
+  </div>
+</footer>
 
 </body>
 </html>
