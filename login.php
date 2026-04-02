@@ -2,7 +2,7 @@
 session_start();
 
 if (!empty($_SESSION['user_loggedIn'])) {
-    header("Location: index.php");
+    header("Location: https://web.ics.purdue.edu/~kilroyc/?");
     exit();
 }
 
