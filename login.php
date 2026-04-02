@@ -2,7 +2,7 @@
 session_start();
 
 if (!empty($_SESSION['user_loggedIn'])) {
-    header("Location: dashboard.php");
+    header("Location: index.php");
     exit();
 }
 
