@@ -1,34 +1,73 @@
 <?php
 session_start();
 
-$error = "";
-
-if ($_SESSION['user_loggedIn']) {
-    header("location: dashboard.php");
+// Redirect if already logged in
+if (!empty($_SESSION['user_loggedIn'])) {
+    header("Location: dashboard.php");
     exit();
 }
 
-$users = [
-    "driver1"    => ["password" => "pass1", "role" => "driver",    "name" => "Driver One"],
-    "driver2"    => ["password" => "pass2", "role" => "driver",    "name" => "Driver Two"],
-    "warehouse1" => ["password" => "pass3", "role" => "warehouse", "name" => "Warehouse One"],
-    "warehouse2" => ["password" => "pass4", "role" => "warehouse", "name" => "Warehouse Two"],
-    "manager1"   => ["password" => "pass5", "role" => "manager",   "name" => "Manager One"],
-];
+$error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = trim($_POST["my_username"] ?? "");
-    $password = trim($_POST["my_password"] ?? "");
+    $username_input = trim($_POST["my_username"] ?? "");
+    $password_input = trim($_POST["my_password"] ?? "");
 
-    if (isset($users[$username]) && $users[$username]["password"] === $password) {
-        $_SESSION["user"]  = $username;
-        $_SESSION["role"]  = $users[$username]["role"];
-        $_SESSION["name"]  = $users[$username]["name"];
-        $_SESSION["user_loggedIn"] = true;
-        header("Location: dashboard.php");
-        exit();
+    // --- Database connection ---
+    $servername = "mydb.itap.purdue.edu";
+    $username   = "g1154094";
+    $password   = "group11";
+    $database   = $username;
+
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // --- Query employee by username ---
+    $sql  = "SELECT EmployeeID, PasswordHash, Role, EmploymentStatus, FirstName, LastName 
+             FROM Employee 
+             WHERE Username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username_input);
+    $stmt->execute();
+    $result   = $stmt->get_result();
+    $employee = $result->fetch_assoc();
+
+    if ($employee && password_verify($password_input, $employee['PasswordHash'])) {
+
+        if ($employee['EmploymentStatus'] !== 'active') {
+            $error = "Your account is " . $employee['EmploymentStatus'] . ". Contact an administrator.";
+        } else {
+            session_regenerate_id(true);
+
+            $_SESSION['user_loggedIn'] = true;
+            $_SESSION['EmployeeID']    = $employee['EmployeeID'];
+            $_SESSION['role']          = $employee['Role'];
+            $_SESSION['name']          = $employee['FirstName'] . ' ' . $employee['LastName'];
+
+            switch ($employee['Role']) {
+                case 'driver':
+                    header("Location: driver_dashboard.php");
+                    break;
+                case 'warehouse staff':
+                    header("Location: warehouse_dashboard.php");
+                    break;
+                case 'logistics engineer':
+                    header("Location: logistics_dashboard.php");
+                    break;
+                default:
+                    header("Location: dashboard.php");
+            }
+            exit();
+        }
+
     } else {
         $error = "Invalid username or password. Please try again.";
     }
-}  
+
+    $stmt->close();
+    $conn->close();
+}
 ?>
