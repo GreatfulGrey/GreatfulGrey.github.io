@@ -27,7 +27,7 @@
 </head>
 <body>
   <div class="box">
-    <h1>✅ It Works!</h1>
+    <h1>It Works!</h1>
     <p>Your HTML is running successfully.</p>
   </div>
 </body>
