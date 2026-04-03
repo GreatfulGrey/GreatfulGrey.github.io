@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>It Works!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .box {
+      background-color: #4CAF50;
+      color: white;
+      padding: 40px 60px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    h1 { margin: 0 0 10px; }
+    p { margin: 0; opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>✅ It Works!</h1>
+    <p>Your HTML is running successfully.</p>
+  </div>
+</body>
+</html>
