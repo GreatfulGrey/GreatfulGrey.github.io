@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password_input = trim($_POST["my_password"] ?? "");
 
     $servername = "mydb.itap.purdue.edu";
-    $username   = "dutta61";
-    $password   = "Gronk#871234";
+    $username   = "g1154094";
+    $password   = "group11";
     $database   = $username;
 
     $conn = new mysqli($servername, $username, $password, $database);
