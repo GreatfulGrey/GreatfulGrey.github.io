@@ -10,18 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username_input = trim($_POST["my_username"] ?? "");
     $password_input = trim($_POST["my_password"] ?? "");
 
-    // --- Purdue DB connection ---
     $servername = "mydb.itap.purdue.edu";
-    $username = "g1154094";       // your CAREER/group username
-    $password = "group11";        // your group password
-    $database = $username;        // ITaP sets database name = your career login
+    $username = "g1154094";       
+    $password = "group11";       
+    $database = $username;       
 
     $conn = new mysqli($servername, $username, $password, $database);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    // --- End connection ---
 
     $sql = "SELECT EmployeeID, Username, PasswordHash, Role, EmploymentStatus, FirstName, LastName
             FROM Employee WHERE Username = ?";
@@ -46,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['name']           = $employee['FirstName'] . ' ' . $employee['LastName'];
         $_SESSION['Username']       = $employee['Username'];
 
-        $conn->close(); // close before redirecting
+        $conn->close(); 
 
         switch ($employee['Role']) {
             case 'driver':
