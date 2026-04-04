@@ -1,5 +1,4 @@
 <?php
-// file: login.php
 
 session_start();
 
@@ -14,6 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password_input = trim($_POST["my_password"] ?? "");
 
     $conn = new mysqli("mydb.itap.purdue.edu", "g1154094", "group11", "g1154094");
+    
+    echo $mysqli->host_info . "\n";
 
     if ($conn->connect_error) {
         die("Connection failed");
