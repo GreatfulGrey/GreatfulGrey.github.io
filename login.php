@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             case 'warehouse staff':
                 header("Location: warehouse_dashboard.php"); break;
             default:
-                header("Location: dashboard.php");
+                header("https://web.ics.purdue.edu/~kilroyc/?");
         }
         exit();
 
