@@ -48,10 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         switch ($employee['Role']) {
             case 'driver':
-                header("Location: driver_dashboard.php");
+                header("Location: https://web.ics.purdue.edu/~kilroyc/?");
                 break;
             case 'warehouse staff':
-                header("Location: warehouse_dashboard.php");
+                header("Location: https://web.ics.purdue.edu/~kilroyc/?");
                 break;
             default:
                 header("Location: https://web.ics.purdue.edu/~kilroyc/?");
