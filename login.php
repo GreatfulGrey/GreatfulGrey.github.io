@@ -1,65 +1,32 @@
 <?php
-session_start();
+$servername = "mydb.itap.purdue.edu";
+$username = "g1154094";   // your CAREER/group username
+$password = "group11";   // your group password
+$database = $username;    // ITaP set up database name = your career login
 
-if (!empty($_SESSION['user_loggedIn'])) {
-    header("Location: https://web.ics.purdue.edu/~kilroyc/?");
-    exit();
+// Create connection (ONLY NEEDED ONCE per PHP page!)
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection was successful, otherwise immediately exit the script
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username_input = trim($_POST["my_username"] ?? "");
-    $password_input = trim($_POST["my_password"] ?? "");
+// create a string for our sql query
+$sql = "SELECT track_name, time FROM track WHERE time < (SELECT AVG(time) FROM track)";
 
-    $servername = "mydb.itap.purdue.edu";
-    $username   = "g1154094";
-    $password   = "group11";
-    $database   = $username;
+// submit the string to SQL through the connection indicated in $conn
+$result = mysqli_query($conn, $sql);
 
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql  = "SELECT EmployeeID, PasswordHash, Role, EmploymentStatus, FirstName, LastName 
-             FROM Employee WHERE Username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username_input);
-    $stmt->execute();
-    $result   = $stmt->get_result();
-    $employee = $result->fetch_assoc();
-
-    if ($employee && $password_input === $employee['PasswordHash']) {
-
-        if ($employee['EmploymentStatus'] !== 'active') {
-            // Account suspended/terminated — send back with error
-            header("Location: login.html?error=1");
-            exit();
-        }
-
-        session_regenerate_id(true);
-        $_SESSION['user_loggedIn'] = true;
-        $_SESSION['EmployeeID']    = $employee['EmployeeID'];
-        $_SESSION['role']          = $employee['Role'];
-        $_SESSION['name']          = $employee['FirstName'] . ' ' . $employee['LastName'];
-
-        switch ($employee['Role']) {
-            case 'driver':
-                header("Location: driver_dashboard.php"); break;
-            case 'warehouse staff':
-                header("Location: warehouse_dashboard.php"); break;
-            default:
-                header("Location: dashboard.php");
-        }
-        exit();
-
-    } else {
-        // Bad username or password — send back with error
-        header("Location: login.html?error=1");
-        exit();
-    }
-
-    $stmt->close();
-    $conn->close();
+// loop through results
+foreach ($result as $row) {
+    echo $row['track_name'] ;
+    echo $row['time'] ;
+    echo "<br>";
+    
+    
 }
+
+// Close the connection (REMEMBER TO DO THIS!)
+$conn->close();
 ?>
