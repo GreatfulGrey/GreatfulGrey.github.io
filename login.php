@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result   = $stmt->get_result();
     $employee = $result->fetch_assoc();
 
-    if ($employee && password_verify($password_input, $employee['PasswordHash'])) {
+    if ($employee && $password_input === $employee['PasswordHash']) {
 
         if ($employee['EmploymentStatus'] !== 'active') {
             // Account suspended/terminated — send back with error
