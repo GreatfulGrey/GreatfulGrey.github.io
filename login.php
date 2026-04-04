@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if (!empty($_SESSION['user_loggedIn'])) {
@@ -8,44 +7,46 @@ if (!empty($_SESSION['user_loggedIn'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     $username_input = trim($_POST["my_username"] ?? "");
     $password_input = trim($_POST["my_password"] ?? "");
 
-    $conn = new mysqli("mydb.itap.purdue.edu", "g1154094", "group11", "g1154094");
-    
-    echo $mysqli->host_info . "\n";
+    // --- Purdue DB connection ---
+    $servername = "mydb.itap.purdue.edu";
+    $username = "g1154094";       // your CAREER/group username
+    $password = "group11";        // your group password
+    $database = $username;        // ITaP sets database name = your career login
+
+    $conn = new mysqli($servername, $username, $password, $database);
 
     if ($conn->connect_error) {
-        die("Connection failed");
+        die("Connection failed: " . $conn->connect_error);
     }
+    // --- End connection ---
 
-    $stmt = $conn->prepare("
-        SELECT EmployeeID, Username, PasswordHash, Role, EmploymentStatus, FirstName, LastName
-        FROM Employee WHERE Username = ?
-    ");
+    $sql = "SELECT EmployeeID, Username, PasswordHash, Role, EmploymentStatus, FirstName, LastName
+            FROM Employee WHERE Username = ?";
 
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username_input);
     $stmt->execute();
-
     $result = $stmt->get_result();
     $employee = $result->fetch_assoc();
 
-    // plain string comparison (as required)
     if ($employee && $password_input === $employee['PasswordHash']) {
-
         if ($employee['EmploymentStatus'] !== 'active') {
+            $conn->close();
             header("Location: login.html?error=1");
             exit();
         }
 
         session_regenerate_id(true);
+        $_SESSION['user_loggedIn']  = true;
+        $_SESSION['EmployeeID']     = $employee['EmployeeID'];
+        $_SESSION['role']           = $employee['Role'];
+        $_SESSION['name']           = $employee['FirstName'] . ' ' . $employee['LastName'];
+        $_SESSION['Username']       = $employee['Username'];
 
-        $_SESSION['user_loggedIn'] = true;
-        $_SESSION['EmployeeID'] = $employee['EmployeeID'];
-        $_SESSION['role'] = $employee['Role'];
-        $_SESSION['name'] = $employee['FirstName'] . ' ' . $employee['LastName'];
-        $_SESSION['Username'] = $employee['Username'];
+        $conn->close(); // close before redirecting
 
         switch ($employee['Role']) {
             case 'driver':
@@ -60,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
 
     } else {
+        $conn->close();
         header("Location: login.html?error=1");
         exit();
     }
