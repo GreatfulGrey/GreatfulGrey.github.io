@@ -5,122 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>PharmaCool ERP</title>
-    
-    <style>
-        .hidden { display: none !important; }
-    </style>
 </head>
 <body>
-
     <nav class="sidebar">
         <h2 class="sidebar-title">PharmaCool</h2>
-        <ul>
-            <li data-target="view-overview">Overview</li>
-            <li data-target="view-warehouse">Warehouse Details</li>
+        <ul class="nav-links">
+            <li data-target="wh-overview" class="active">Overview</li>
             <li data-target="view-shipments">Shipments</li>
             <li data-target="view-batch">Batch/Vendor</li>
-			<li data-target="view-custody">Custody Event</li>
-			<li data-target="view-settings">Setting</li>
-
+            <li data-target="view-custody">Custody Event</li>
+            <li data-target="view-settings">Settings</li>
         </ul>
     </nav>
-
+    
     <div class="main-wrapper">
-        
-        <header>        
-            <div id="header-center">
+        <header class="top-header">        
+            <div class="header-center">
                 <form class="search-form">
-                    <input type="search" placeholder="Search Bar">
+                    <input type="search" class="search-input" placeholder="Search Bar">
                 </form>
             </div>
         </header>
-
+        
         <main class="content">
-		
-            <div id="view-overview" class="view-section">
-			<h2>Status</h2>
-				<section id ="status">
-					<div class = "status-box">Uh oh</div>
-				</section>
-		
-			<h2>Notes</h2>
-			    <section id="notes">
-                    <div class="note-box">Note 1</div>
-                    <div class="note-box">Note 2</div>
-                    <div class="note-box">Note 3</div>
-					<div class="note-box">Note 4</div>
-                    <div class="note-box">Note 5</div>
-                    <div class="note-box">Note 6</div>
+            <div id="wh-overview" class="view-section">
+                <section class="notes-grid">
+                    <div class="card note-box">
+                        <p class="note-title">Lots</p>
+                        <p class="note-value" id="stat-lots">0</p> 
+                    </div>
+                    <div class="card note-box">
+                        <p class="note-title">Zones</p>
+                        <p class="note-value" id="stat-zones">0</p>
+                    </div>
+                    <div class="card note-box">
+                        <p class="note-title">Shipments</p>
+                        <p class="note-value" id="stat-shipments">0</p>
+                    </div>
+                    <div class="card note-box">
+                        <p class="note-title">Arrivals</p>
+                        <p class="note-value" id="stat-arrivals">0</p>
+                    </div>        
+                    <div class="card note-box">
+                        <p class="note-title">Batches</p>
+                        <p class="note-value" id="stat-batches">0</p>
+                    </div>
                 </section>
-				
-			<h2>Data</h2>
-                <section id="data-boxes">
-                    <h3>Table</h3>
-                    <p>Balls</p>
-                </section>
-
-                <section id="data-table">
-                    <h3>Table</h3>
-                    <p>Balls</p>
-                </section>
-
-                <section id="graphs">
-                    <div class="graph-box">Graph 1</div>
-                    <div class="graph-box">Graph 2</div>
-                    <div class="graph-box">Graph 3</div>
+                <section class="data-section">
+                    <table class="data-table clickable-row" id="warehouse-overview-table" data-target="view-warehouse">
+                        <tbody>
+                            <tr>
+                                <td><p>WAREHOUSE NAME</p><p>TYPE</p><p>STATUS</p></td>
+                                <td><canvas id="utilizationDoughnut"></canvas></td>
+                                <td># LOTS STORED</td>
+                                <td>OPEN ALERTS</td>
+                                <td># DEPARTING TODAY</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </div>
 
             <div id="view-warehouse" class="view-section hidden">
-                <section class="Sales">
-                    <h2>Sales Dashboard Placeholder</h2>
+                <div class="section-header">
+                    <h2 class="section-title">Warehouse ###### Details</h2>
+                    <button id="back-to-data" class="btn btn-outline">Back</button>
+                </div>
+                <section class="data-section">
+                    <table class="data-table clickable-row" id="warehouse-zone-table" data-target="view-zone">
+                        <thead>
+                            <tr>
+                                <th>Zone</th>
+                                <th>Type</th>
+                                <th>Temperature Range</th>
+                                <th>Capacity</th>
+                                <th>Capacity in Use</th>
+                                <th>Utilization</th>
+                                <th>Alerts</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            </tbody>
+                    </table>
                 </section>
             </div>
 
+            <div id="view-zone" class="view-section hidden">
+                <table class="data-table clickable-row" id="zone-lot-table">
+                    <thead>
+                        <tr>
+                            <th>Lot</th>
+                            <th>Vendor</th>
+                            <th>Batch</th>
+                            <th>Volume</th>
+                            <th>Expiration Date</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        </tbody>
+                </table>
+                <div class="section-header">
+                    <h2 class="section-title">Excursion Events</h2>
+                </div>
+                <div class="card">
+                    <canvas id="excursionChart"></canvas>
+                </div>
+            </div>
+            
             <div id="view-shipments" class="view-section hidden">
-                <section class="KPI">
-                    <h2>KPI Tracking Placeholder</h2>
+                <section class = "notes-grid">
+                    <label class="switch">
+                        <input type="checkbox" id = "IOswitch">
+                        <span class="slider"></span>
+                    </label>
+                    <h1 class="badge-title" id = "IOstatus">Outgoing Shipments</h1>
                 </section>
-                <section id="data-table">
-                    <h3>Table</h3>
-                    <p>Ballsn [POIFBADSOIDJIU;oihOIHpoioihsbdfluihdsflihuadsfluihasdflbhuiusadlghuil</p>
+                <section class="data-section">
+                    <table class="data-table" id="shipments-table">
+                        <thead>
+                            <tr>
+                                <th>Shipment ID</th>
+                                <th>Status</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Departure Time</th>
+                                <th>Truck ID</th>
+                                <th>Lot Count</th>
+                                <th>Alerts</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                        </tbody>
+                    </table>
                 </section>
             </div>
 
             <div id="view-batch" class="view-section hidden">
-                <section class="KPI">
-                    <h2>KPI Tracking Placeholder</h2>
-                </section>
-                <section id="data-table">
-                    <h3>Table</h3>
-                    <p>Ballsn [POIFBADSOIDJIU;oihOIHpoioihsbdfluihdsflihuadsfluihasdflbhuiusadlghuil</p>
+                <h2 class="badge-title">WH Badge (What is this?)</h2>
+                <section class="data-section">
+                    <table class="data-table" id="batch-table">
+                        <thead>
+                            <tr>
+                                <th>Vendor Name</th>
+                                <th>Vendor ID</th>
+                                <th>Batch Number</th>
+                                <th>Manufacture Date</th>
+                                <th>Expiry Date</th>
+                                <th>Total Volume</th>
+                                <th>Required Temp Range</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                        </tbody>
+                    </table>
                 </section>
             </div>
 
             <div id="view-custody" class="view-section hidden">
-                <section class="KPI">
-                    <h2>KPI Tracking Placeholder</h2>
-                </section>
-                <section id="data-table">
-                    <h3>Table</h3>
-                    <p>Ballsn [POIFBADSOIDJIU;oihOIHpoioihsbdfluihdsflihuadsfluihasdflbhuiusadlghuil</p>
+                <h2 class="badge-title">WH Badge (What is this?)</h2>
+                <section class="data-section">
+                    <table class="data-table" id="custody-table">
+                        <thead>
+                            <tr>
+                                <th>Event Time</th>
+                                <th>Lot Number</th>
+                                <th>Employee Name</th>
+                                <th>Role</th>
+                                <th>Origin Location</th>
+                                <th>Destination</th>
+                                <th>Condition</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                        </tbody>
+                    </table>
                 </section>
             </div>
 
             <div id="view-settings" class="view-section hidden">
-                <section class="wireframe-border" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #fff; gap: 20px;">
-                    <h2>Settings & Details Placeholder</h2>
-                    <button style="padding: 10px 20px; border: 2px solid #d32f2f; background: white; color: #d32f2f; border-radius: 5px; cursor: pointer;">Logout Dummy Button</button>
-                </section>
-            </div>
+                </div>
         </main>
         
         <footer>
             <div class="copyright-footer">PharmaCool 2026 ®</div>
         </footer>
-
     </div>
-
 </body>
 </html>
